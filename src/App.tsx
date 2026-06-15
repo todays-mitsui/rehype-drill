@@ -12,12 +12,26 @@ const SAMPLE = `<section class="card">
 export function App() {
   const [html, setHtml] = useState(SAMPLE);
 
+  // Tab でフォーカスを移さず、カーソル位置にスペース2つを挿入する。
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.key !== "Tab") return;
+    e.preventDefault();
+    const ta = e.currentTarget;
+    const { selectionStart: start, selectionEnd: end } = ta;
+    setHtml(html.slice(0, start) + "  " + html.slice(end));
+    // controlled なので value が再描画されてからキャレットを戻す。
+    requestAnimationFrame(() => {
+      ta.selectionStart = ta.selectionEnd = start + 2;
+    });
+  };
+
   return (
     <div className="app">
       <textarea
         className="editor"
         value={html}
         onChange={(e) => setHtml(e.target.value)}
+        onKeyDown={handleKeyDown}
         spellCheck={false}
         autoFocus
       />
