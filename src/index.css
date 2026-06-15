@@ -1,0 +1,36 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  height: 100%;
+}
+
+.app {
+  display: flex;
+  height: 100vh;
+  font-family: system-ui, sans-serif;
+}
+
+.editor,
+.preview {
+  flex: 1;
+  padding: 1rem;
+  overflow: auto;
+}
+
+.editor {
+  border: none;
+  border-right: 1px solid #ccc;
+  resize: none;
+  font-family: ui-monospace, monospace;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.editor:focus {
+  outline: none;
+}
